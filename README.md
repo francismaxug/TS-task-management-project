@@ -3,7 +3,7 @@ This is a [Next.js](https://nextjs.org/) project with TypeScript and tailwindCss
 ## Clone Repository
 
 git clone https://github.com/francismaxug/TS-task-management-project.git
-cd chat-app
+cd TS-task-management-project
 
 ## Install dependencies
 
@@ -20,3 +20,12 @@ SECRETE_KEY = your_secrete_key
 npm run dev
 
 ## Project structure
+
+
+
+
+
+
+
+
+
