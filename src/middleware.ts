@@ -13,5 +13,5 @@ export async function middleware(req: NextRequest, res: NextResponse) {
 }
 
 export const config = {
-  matcher: ["/chat/:path*"],
+  matcher: ["/tasks/:path*"],
 }
