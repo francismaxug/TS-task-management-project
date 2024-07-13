@@ -2,6 +2,9 @@ import SideBarLinks from "./NavLinks"
 import Image from "next/image"
 import { getSession } from "@/app/actions/auth"
 import { redirect } from "next/navigation"
+import { routes } from "@/lib/utils"
+import { IRoutes } from "@/lib/types"
+import Link from "next/link"
 
 interface Iuser {
   user: {
@@ -36,7 +39,7 @@ const SideBar = async () => {
               className=" size-10 rounded-full"
             />
             <div className="text-[0.75rem]">
-              <p>{user.name}</p>
+              <p className=" font-bold">{user.name}</p>
               <p>{user.email}</p>
             </div>
           </div>
@@ -45,6 +48,9 @@ const SideBar = async () => {
           className={`duration-300 border bg-leftSideBar h-full shadow-lg rounded`}
         >
           <SideBarLinks />
+          <div>
+       
+        </div>
         </div>
       </div>
     </aside>

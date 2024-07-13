@@ -10,15 +10,10 @@ import { Loader2 } from "lucide-react"
 import { signup } from "@/app/actions/auth"
 import { toast } from "react-toastify"
 import { redirect, useRouter } from "next/navigation"
-import { InitState } from "@/lib/types"
+
 import { motion } from "framer-motion"
 import { LiaEye, LiaEyeSlash } from "react-icons/lia"
-const initailState: InitState = {
-  errorMssage: null,
-  status: "",
-  authToken: "",
-  date: new Date(),
-}
+
 
 const FormDataSchema = z.object({
   name: z.string().min(1, "Name must be 3 or more characters"),

@@ -15,7 +15,7 @@ const ContentHeader = () => {
   return (
     <>
       <div className=" bg-topNav mb-3 px-2 sm:rounded py-3 border sm:py-2 lg:py-1 3xl:py-[0.5rem]  items-center gap-x-1 flex justify-between">
-        <p>Hello</p>
+        <p>Hellos</p>
         <button className="lg:hidden">
           <IoMenuOutline
             onClick={() => setShowMenu((p) => !p)}

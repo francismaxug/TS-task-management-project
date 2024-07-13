@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useFormStatus, useFormState } from "react-dom"
 import { z } from "zod"
-import { InitState } from "@/lib/types"
+
 import { useEffect } from "react"
 import { Loader2 } from "lucide-react"
 import { login } from "@/app/actions/auth"

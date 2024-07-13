@@ -4,13 +4,13 @@ import React from "react"
 import ContentHeader from "./dashboard-components/ContentHeader"
 import Analytics from "./overview/page"
 
-const Chat = () => {
+const MainPage = () => {
   return (
     <main>
-      <ContentHeader />
       <Analytics />
+    
     </main>
   )
 }
 
-export default Chat
+export default MainPage

@@ -12,7 +12,7 @@ const Container = ({ children }: { children?: React.ReactNode }) => {
    bg-white rounded  shadow-md mx-0 lg:mx-6 3xl:mx-12 4xl:mx-24 4xl:w-[calc(100%-350px)]"
         >
           <div className={`drop-shadow-lg mb-10 `}>
-            <ContentHeader />
+            {/* <ContentHeader /> */}
             {children}
           </div>
           {/* <TextArea /> */}
