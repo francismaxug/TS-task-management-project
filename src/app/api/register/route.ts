@@ -24,9 +24,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         }
       )
     }
-
-    // const hashPassword = await bcrypt.hash(password, 10)
-
     const createdUser = new User({
       name,
       email,
@@ -37,6 +34,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     return new NextResponse(
       JSON.stringify({
         status: "success",
+        id: createdUser._id,
         name: createdUser.name,
         email: createdUser.email,
       }),

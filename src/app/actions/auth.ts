@@ -63,6 +63,7 @@ export async function signup(formdata: FormState): Promise<any> {
     const user = {
       name,
       email,
+      id: data.id,
     }
     const expires = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000)
     //encryt the user data
@@ -107,6 +108,7 @@ export async function login(formdata: FormLogin): Promise<any> {
     const user = {
       name: data.name,
       email,
+      id: data.id,
     }
     const expires = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000)
     const session = await encrypt({ user, expires })
@@ -130,5 +132,4 @@ export async function getSession() {
 export async function logout() {
   // Destroy the session
   cookies().set("session", "", { expires: new Date(0) })
- 
 }

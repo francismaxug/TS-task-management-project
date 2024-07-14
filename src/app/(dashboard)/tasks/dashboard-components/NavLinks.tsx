@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Loading from "./Loading"
 import { FaRegTrashAlt } from "react-icons/fa"
 // import { useAppContext } from "@/app/context/AppContext"
@@ -15,12 +15,33 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogTrigger } from "@/components/ui/dialog"
 import { TaskForm } from "@/components/TaskForm"
 
+
+interface Iuser {
+  _id: string
+  email: string
+  name: string
+}
 const SideBarLinks = () => {
   // const router = useRouter()
   // const params = useParams()
   // console.log(params)
 
   const [openModal, setOpenModal] = useState(false)
+  const [users, setUsers] = useState<Iuser[] | []>([])
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch("/api/users")
+        const data = await response.json()
+        setUsers(data.user)
+      } catch (error) {
+        console.log(error)
+        setUsers([])
+      }
+    }
+    fetchUsers()
+  }, [])
+  console.log(users)
 
   const handleDeleteConversation = () => {}
 
@@ -36,7 +57,7 @@ const SideBarLinks = () => {
               Add Task
             </Button>
           </DialogTrigger>
-          <TaskForm />
+          <TaskForm users={users} />
         </Dialog>
         {/* <button className=" bg-indigo-900 rounded-sm text-white mt-4  text-center py-1 mx-7">
           Add Task

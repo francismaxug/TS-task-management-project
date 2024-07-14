@@ -42,6 +42,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     return new NextResponse(
       JSON.stringify({
         status: "success",
+        id: userExist._id,
         name: userExist.name,
         email: userExist.email,
       }),
