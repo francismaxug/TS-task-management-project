@@ -1,11 +1,34 @@
-import React from "react"
 import ContentHeader from "../dashboard-components/ContentHeader"
+import React from "react"
+import { getSession } from "@/app/actions/auth"
+import { AllTasks } from "@/app/(dashboard)/tasks/dashboard-components/DataTable"
 
-const TaskToMe = () => {
-  return <>
-  <ContentHeader/>
-  <p> Assigned to me</p>
- </>
+import { ITasks } from "@/lib/types"
+
+async function getTasks(id: string) {
+  try {
+    const res = await fetch(
+      `http://localhost:3000/api/tasks/task-assigned-to-me?id=${id}`
+    )
+    if (!res.ok) {
+      return
+    }
+    return res.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+const TaskToMe = async () => {
+  const user = await getSession()
+  console.log(user)
+  const data: ITasks[] = await getTasks(user?.user?.id)
+  console.log(data)
+  return (
+    <>
+      <ContentHeader />
+      <AllTasks tasks={data} title="Task Assigned To Me" />
+    </>
+  )
 }
 
 export default TaskToMe

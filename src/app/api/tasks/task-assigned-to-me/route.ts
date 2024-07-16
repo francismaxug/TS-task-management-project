@@ -4,7 +4,7 @@ import ConnectDB from "@/app/config/db"
 import Task from "@/app/model/tasksModel"
 import { getSession } from "@/app/actions/auth"
 
-export const GET = async (req: NextRequest, res: NextResponse) => {
+export const GET = async (req:NextRequest, res:NextResponse) => {
   // const session = await getSession()
   // console.log(session)
   const searchParams = req.nextUrl.searchParams;
@@ -15,7 +15,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
     await ConnectDB()
 
-    const myTasks = await Task.find({ createdBy: id })
+    const myTasks = await Task.find({ assignedTo: id })
       .populate("assignedTo", "name")
       .populate("createdBy", "name")
 

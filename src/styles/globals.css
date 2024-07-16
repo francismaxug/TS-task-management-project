@@ -93,7 +93,9 @@
    bg-white rounded  border shadow-md mx-0 lg:mx-6;
   }
 }
-
+.nav-item {
+  transition: all 300ms ease-out;
+}
 /* HTML: <div class="loader"></div> */
 /* .chatloader {
   width: 40px;
@@ -107,6 +109,7 @@
 .Toastify__toast {
   font-size: 16px;
 }
+
 @keyframes l3 {
   20% {
     background-position: 0% 0%, 50% 50%, 100% 50%;

@@ -46,41 +46,11 @@ import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 
 import { useRouter } from "next/navigation"
+import { formSchema } from "@/lib/formSchema"
+import { Iuser } from "@/lib/types"
 
-const formSchema = z.object({
-  title: z.string().min(3, {
-    message: "title must be at least 3 characters.",
-  }),
-  assignedTo: z.string().min(3, {
-    message: "please select a person responsible.",
-  }),
-  priority: z.string().min(3, {
-    message: "please select priority level.",
-  }),
-  status: z.string().min(3, {
-    message: "please select task status.",
-  }),
-  startDate: z.date({
-    required_error: "start date is required.",
-  }),
-  dueDate: z.date({
-    required_error: "end date is required.",
-  }),
-  description: z
-    .string()
-    .min(10, {
-      message: "Description must be at least 10 characters.",
-    })
-    .max(160, {
-      message: "Destription must not be longer than 160 characters.",
-    }),
-})
 
-interface Iuser {
-  _id: string
-  email: string
-  name: string
-}
+
 
 export function TaskForm({ users }: { users: Iuser[] | [] }) {
   const router = useRouter()
@@ -93,13 +63,9 @@ export function TaskForm({ users }: { users: Iuser[] | [] }) {
   })
 
   console.log(form.formState.isSubmitting)
-  function showToast() {
-    toast.success("Task Created Successfully")
-  }
-  // 2. Define a submit handler.
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+
     console.log(values)
     try {
       const res = await fetch("/api/tasks", {
@@ -114,8 +80,7 @@ export function TaskForm({ users }: { users: Iuser[] | [] }) {
         toast.error("error creating new task")
         return
       }
-      // window.location.href = window.location.href
-      // setTimeout(showToast, 350)
+
       setTimeout(() => {
         toast.success("Task Created Successfully")
         setTimeout(() => {
@@ -130,6 +95,7 @@ export function TaskForm({ users }: { users: Iuser[] | [] }) {
       // router.push("/tasks/all-task")
     }
   }
+
   return (
     <>
       <DialogContent className="sm:max-w-lg">
@@ -138,7 +104,7 @@ export function TaskForm({ users }: { users: Iuser[] | [] }) {
             <DialogTitle>Add New Task</DialogTitle>
           </DialogHeader>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-1">
               <FormField
                 control={form.control}
                 name="title"

@@ -9,18 +9,18 @@ export function cn(...inputs: ClassValue[]) {
 export const routes: IRoutes[] = [
   {
     name: "Overview",
-    path: "tasks/overview",
+    path: "overview",
   },
   {
     name: "All Task",
-    path: "tasks/all-task",
+    path: "all-task",
   },
   {
     name: "Assigned To Me",
-    path: "tasks/task-assign-to-me",
+    path: "task-assign-to-me",
   },
   {
     name: "Created By Me",
-    path: "tasks/task-created-by-me",
+    path: "task-created-by-me",
   },
 ]

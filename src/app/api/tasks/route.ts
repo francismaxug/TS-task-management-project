@@ -1,8 +1,10 @@
 import { NextResponse, NextRequest } from "next/server"
 import ConnectDB from "@/app/config/db"
+import { revalidatePath } from "next/cache"
 
 import Task from "@/app/model/tasksModel"
 import { getSession } from "@/app/actions/auth"
+export const revalidate = true
 export const POST = async (req: NextRequest, res: NextResponse) => {
   const {
     title,
@@ -40,14 +42,16 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       createdBy: session?.user?.id,
     })
 
-    // return new NextResponse(
-    //   JSON.stringify({
-    //     status: "success",
-    //     newTask,
-    //   }),
-    //   { status: 201 }
-    // )
-    return Response.redirect(`http://localhost:3000/tasks/all-task`)
+    const path = req.nextUrl.pathname
+    revalidatePath(path)
+    return new NextResponse(
+      JSON.stringify({
+        status: "success",
+      }),
+      { status: 201 }
+    )
+
+    // return Response.redirect(`http://localhost:3000/tasks/overview`)
   } catch (error) {
     console.log(error)
     return new NextResponse(
@@ -65,16 +69,15 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
     await ConnectDB()
+    const session = await getSession()
+    console.log(session)
 
     const allTask = await Task.find({})
+      .sort("-createdAt")
+      .populate("assignedTo", "name")
+      .populate("createdBy", "name")
 
-    return new NextResponse(
-      JSON.stringify({
-        status: "success",
-        allTask,
-      }),
-      { status: 200 }
-    )
+    return new NextResponse(JSON.stringify(allTask), { status: 200 })
   } catch (error) {
     console.log(error)
     return new NextResponse(

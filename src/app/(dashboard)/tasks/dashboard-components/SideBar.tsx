@@ -21,7 +21,7 @@ const SideBar = async () => {
   }
   const { user } = data
 
-  // console.log(user)
+  console.log(user)
   return (
     <aside
       className={`fixed top-14  z-30 bottom-3 hidden lg:block 
