@@ -7,10 +7,15 @@ import LoadingMessages from "../loading"
 import { ITasks } from "@/lib/types"
 import { getSession } from "@/app/actions/auth"
 
+
+const apiDOMAIN = process.env.NEXT_PUBLIC_API_DOMAIN || null
 async function getTasks(id: string) {
+  if(!apiDOMAIN) {  
+    return []
+  }
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/tasks/task-created-by-me?id=${id}`
+      `${apiDOMAIN}/tasks/task-created-by-me?id=${id}`
     )
     if (!res.ok) {
       return

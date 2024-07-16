@@ -5,11 +5,13 @@ import { AllTasks } from "@/app/(dashboard)/tasks/dashboard-components/DataTable
 
 import { ITasks } from "@/lib/types"
 
+const apiDOMAIN = process.env.NEXT_PUBLIC_API_DOMAIN || null
 async function getTasks(id: string) {
+  if (!apiDOMAIN) {
+    return []
+  }
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/tasks/task-assigned-to-me?id=${id}`
-    )
+    const res = await fetch(`${apiDOMAIN}/tasks/task-assigned-to-me?id=${id}`)
     if (!res.ok) {
       return
     }

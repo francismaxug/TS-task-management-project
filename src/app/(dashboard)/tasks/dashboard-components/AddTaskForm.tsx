@@ -82,7 +82,7 @@ export function AddTaskForm({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/tasks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

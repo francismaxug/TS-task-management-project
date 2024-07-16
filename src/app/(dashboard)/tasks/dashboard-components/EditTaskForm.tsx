@@ -66,7 +66,7 @@ export function EditTask({
     const fetchTask = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`
+          `${process.env.NEXT_PUBLIC_API_DOMAIN}/tasks/${id}`
         )
         const data = await response.json()
         // console.log(data)

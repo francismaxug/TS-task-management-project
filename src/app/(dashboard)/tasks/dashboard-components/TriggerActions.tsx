@@ -49,7 +49,7 @@ const TriggerActions = ({ id }: { id: string }) => {
       confirm("Are you sure you want to delete this task?")
       if (!confirm) return
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`,
+        `${process.env.NEXT_PUBLIC_API_DOMAIN}/tasks/${id}`,
         {
           method: "DELETE",
         }

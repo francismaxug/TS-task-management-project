@@ -10,10 +10,14 @@ import Link from "next/link"
 import { TiArrowBackOutline } from "react-icons/ti"
 import GoBack from "../../dashboard-components/GoBack"
 
+const apiDOMAIN = process.env.NEXT_PUBLIC_API_DOMAIN || null
 async function getATask(id: string) {
+  if (!apiDOMAIN) {
+    return {}
+  }
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`,
+      `${apiDOMAIN}/tasks/${id}`,
       {
         cache: "no-cache",
       }

@@ -13,6 +13,7 @@ interface FormState {
 interface FormLogin extends Omit<FormState, "name"> {}
 
 console.log(process.env.SECRET_KEY)
+const apiDOMAIN = process.env.NEXT_PUBLIC_API_DOMAIN || null
 
 const secretKey = (process.env.SECRET_KEY as string) || "secret"
 const key = new TextEncoder().encode(secretKey)
@@ -40,7 +41,7 @@ export async function signup(formdata: FormState): Promise<any> {
   //check if the password and confirm password match
 
   try {
-    const response = await fetch(`http://localhost:3000/api/register`, {
+    const response = await fetch(`${apiDOMAIN}/register`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -87,7 +88,7 @@ export async function login(formdata: FormLogin): Promise<any> {
   // console.log(process.env.AUTH_URL)
 
   try {
-    const response = await fetch(`http://localhost:3000/api/login`, {
+    const response = await fetch(`${apiDOMAIN}/login`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
