@@ -9,7 +9,16 @@ export interface Iuser {
   email: string
   name: string
 }
-
+export interface ITaskStats {
+  status: string
+  stats: {
+    completed: number
+    open: number
+    inProgress: number
+    overdue: number
+    total: number
+  }
+}
 export interface ITasks {
   _id: string
   title: string

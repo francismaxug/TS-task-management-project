@@ -50,7 +50,7 @@ import { revalidatePath } from "next/cache"
 import { formSchema } from "@/lib/formSchema"
 import { ITasks, Iuser } from "@/lib/types"
 
-export function EditTask({ id }: { id: string }) {
+export function EditTask({ id, users }: { id: string; users: Iuser[] | [] }) {
   const router = useRouter()
 
   console.log(id)
@@ -150,7 +150,7 @@ export function EditTask({ id }: { id: string }) {
                 </FormLabel>
                 <FormControl>
                   <Input
-                    defaultValue={field.value}
+                    defaultValue={task?.title}
                     placeholder="Task title"
                     {...field}
                   />
@@ -171,24 +171,20 @@ export function EditTask({ id }: { id: string }) {
                 <Select onValueChange={field.onChange}>
                   <SelectTrigger className="w-[100%]">
                     <SelectValue
-                      defaultValue={task?.assignedTo.name}
                       className=""
-                      placeholder="Select a user"
+                      placeholder={`${task?.assignedTo.name!}`}
                     />
                   </SelectTrigger>
                   <SelectContent className=" text-xs">
                     <SelectGroup>
                       <SelectLabel>Users</SelectLabel>
-                      {/* {users?.map((user: Iuser) => (
+                      {users?.map((user: Iuser) => (
                         <SelectItem key={user._id} value={user._id}>
-                          {user.name}
+                          {user._id === task?.createdBy._id
+                            ? "Myself"
+                            : user.name}
                         </SelectItem>
-                      ))} */}
-                      <SelectItem value="apple">Apple</SelectItem>
-                      <SelectItem value="banana">Banana</SelectItem>
-                      <SelectItem value="blueberry">Blueberry</SelectItem>
-                      <SelectItem value="grapes">Grapes</SelectItem>
-                      <SelectItem value="pineapple">Pineapple</SelectItem>
+                      ))}
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -220,7 +216,13 @@ export function EditTask({ id }: { id: string }) {
                           {field.value ? (
                             format(field.value, "PPP")
                           ) : (
-                            <span>Pick a date</span>
+                            <span>
+                              {task?.startDate ? (
+                                format(task?.startDate, "PPP")
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                            </span>
                           )}
                           <CalendarIcon className="ml-auto h-3 w-3 opacity-50" />
                         </Button>
@@ -262,7 +264,13 @@ export function EditTask({ id }: { id: string }) {
                           {field.value ? (
                             format(field.value, "PPP")
                           ) : (
-                            <span>Pick a date</span>
+                            <span>
+                              {task?.dueDate ? (
+                                format(task?.dueDate, "PPP")
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                            </span>
                           )}
                           <CalendarIcon className="ml-auto h-3 w-3 opacity-50" />
                         </Button>
@@ -296,7 +304,10 @@ export function EditTask({ id }: { id: string }) {
 
                   <Select onValueChange={field.onChange}>
                     <SelectTrigger className="w-[100%]">
-                      <SelectValue className="" placeholder="Select Priority" />
+                      <SelectValue
+                        className=""
+                        placeholder={`${task?.priority!}`}
+                      />
                     </SelectTrigger>
                     <SelectContent className=" text-xs">
                       <SelectGroup>
@@ -324,7 +335,7 @@ export function EditTask({ id }: { id: string }) {
 
                   <Select onValueChange={field.onChange}>
                     <SelectTrigger className="w-[100%]">
-                      <SelectValue className="" placeholder=" Select Status" />
+                      <SelectValue className="" placeholder={`${task?.status!}`} />
                     </SelectTrigger>
                     <SelectContent className=" text-xs">
                       <SelectGroup>

@@ -1,5 +1,5 @@
 "use clent"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -23,8 +23,24 @@ import Link from "next/link"
 import { EditTask } from "./EditTaskForm"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
+import { Iuser } from "@/lib/types"
 
 const TriggerActions = ({ id }: { id: string }) => {
+  const [users, setUsers] = useState<Iuser[] | []>([])
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch("/api/users")
+        const data = await response.json()
+        setUsers(data.user)
+      } catch (error) {
+        console.log(error)
+        setUsers([])
+      }
+    }
+    fetchUsers()
+  }, [])
+  console.log(users)
   const router = useRouter()
   const handleDeleteTask = async (id: string) => {
     try {
@@ -54,7 +70,7 @@ const TriggerActions = ({ id }: { id: string }) => {
         <SheetTrigger asChild>
           <button className="w-full">Edit</button>
         </SheetTrigger>
-        <EditTask id={id} />
+        <EditTask id={id} users={users} />
       </Sheet>
       <DropdownMenuItem>
         <button

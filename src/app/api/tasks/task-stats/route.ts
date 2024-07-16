@@ -69,12 +69,12 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
 
     console.log(statistics)
     console.log(statistics[0])
-    const data = statistics[0]
+    const stats = statistics[0]
 
     return new NextResponse(
       JSON.stringify({
         status: "success",
-        data,
+        stats,
       }),
       { status: 200 }
     )

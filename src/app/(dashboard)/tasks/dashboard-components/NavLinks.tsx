@@ -2,25 +2,15 @@
 
 import React, { useEffect, useState } from "react"
 import { FaRegTrashAlt } from "react-icons/fa"
-// import { useAppContext } from "@/app/context/AppContext"
-import ConfirmationModal from "./DeleteTasks"
 import { useRouter } from "next/navigation"
 import { useParams } from "next/navigation"
 import { FiPlus } from "react-icons/fi"
 import { routes } from "@/lib/utils"
 import { IRoutes } from "@/lib/types"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Dialog, DialogTrigger } from "@/components/ui/dialog"
-import { TaskForm } from "@/app/(dashboard)/tasks/dashboard-components/TaskForm"
 import {
   Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
+
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { AddTaskForm } from "@/app/(dashboard)/tasks/dashboard-components/AddTaskForm"
@@ -36,7 +26,6 @@ const SideBarLinks = () => {
   // const params = useParams()
   // console.log(params)
 
-  const [openModal, setOpenModal] = useState(false)
   const [openSheet, setOpenSheet] = useState(false)
   const [users, setUsers] = useState<Iuser[] | []>([])
   const pathname = usePathname()
@@ -68,20 +57,7 @@ const SideBarLinks = () => {
           </SheetTrigger>
           <AddTaskForm onClose={setOpenSheet} users={users} />
         </Sheet>
-        {/* <Dialog>
-          <DialogTrigger asChild>
-            <Button
-              variant="default"
-              className=" bg-indigo-900 rounded-sm text-white mt-4  text-center py-1 mx-7"
-            >
-              Add Task
-            </Button>
-          </DialogTrigger>
-          <TaskForm users={users} />
-        </Dialog> */}
-        {/* <button className=" bg-indigo-900 rounded-sm text-white mt-4  text-center py-1 mx-7">
-          Add Task
-        </button> */}
+     
         <div className=" space-y-3">
           {routes.map((route: IRoutes, index: number) => (
             <div
@@ -103,14 +79,14 @@ const SideBarLinks = () => {
         </div>
       </div>
 
-      {openModal && (
+      {/* {openModal && (
         <ConfirmationModal
           modalState={openModal}
           // conversationId={conversationId!}
           setOpenModalFxn={setOpenModal}
           // handleDeleteConversation={handleDeleteConversation}
         />
-      )}
+      )} */}
     </>
   )
 }

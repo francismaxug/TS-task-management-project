@@ -12,7 +12,7 @@ async function getTasks() {
       cache: "no-cache",
     })
     if (!res.ok) {
-      return
+      throw new Error("Something went wrong")
     }
     return res.json()
   } catch (error) {

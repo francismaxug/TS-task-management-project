@@ -22,7 +22,7 @@ export const GET = async (
       .populate("assignedTo", "name")
       .populate("createdBy", "name")
 
-    console.log(singleTask)
+    // console.log(singleTask)
     return new NextResponse(JSON.stringify(singleTask), { status: 200 })
   } catch (error) {
     console.log(error)
