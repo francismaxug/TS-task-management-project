@@ -4,7 +4,6 @@ import ConnectDB from "@/app/config/db"
 import Task from "@/app/model/tasksModel"
 import { getSession } from "@/app/actions/auth"
 import { revalidatePath } from "next/cache"
-export const revalidate = true
 export const GET = async (
   request: NextRequest,
   {

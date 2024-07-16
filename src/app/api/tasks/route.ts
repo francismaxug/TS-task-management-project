@@ -4,7 +4,6 @@ import { revalidatePath } from "next/cache"
 
 import Task from "@/app/model/tasksModel"
 import { getSession } from "@/app/actions/auth"
-export const revalidate = true
 export const POST = async (req: NextRequest, res: NextResponse) => {
   const {
     title,
@@ -50,8 +49,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       }),
       { status: 201 }
     )
-
-    // return Response.redirect(`http://localhost:3000/tasks/overview`)
   } catch (error) {
     console.log(error)
     return new NextResponse(

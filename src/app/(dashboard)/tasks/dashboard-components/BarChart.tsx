@@ -28,10 +28,10 @@ const chartConfig = {
 
 const BarChartt = ({ data }: { data: ITaskStats }) => {
   const chartData = [
-    { task: "Open", tasks: (data.stats.open*10), fill: "hsl(var(--chart-4))" },
-    { task: "In Progress", tasks: (data.stats.inProgress*10), fill: "hsl(var(--chart-3))" },
-    { task: "Completed", tasks: (data.stats.completed*10), fill: "hsl(var(--chart-2))" },
-    { task: "Overdue", tasks: (data.stats.overdue*10), fill: "hsl(var(--chart-1))" },
+    { task: "Open", tasks: (data?.stats?.open*10), fill: "hsl(var(--chart-4))" },
+    { task: "In Progress", tasks: (data?.stats?.inProgress*10), fill: "hsl(var(--chart-3))" },
+    { task: "Completed", tasks: (data?.stats?.completed*10), fill: "hsl(var(--chart-2))" },
+    { task: "Overdue", tasks: (data?.stats?.overdue*10), fill: "hsl(var(--chart-1))" },
   ]
   return (
     <Card>

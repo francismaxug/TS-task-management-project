@@ -10,8 +10,7 @@ import { getSession } from "@/app/actions/auth"
 async function getTasks(id: string) {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/tasks/task-created-by-me?id=${id}`
-   
+      `${process.env.NEXT_PUBLIC_API_URL}/api/tasks/task-created-by-me?id=${id}`
     )
     if (!res.ok) {
       return

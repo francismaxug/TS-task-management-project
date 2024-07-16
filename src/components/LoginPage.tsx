@@ -81,7 +81,7 @@ const Login = () => {
                   type="email"
                   placeholder="email"
                   {...register("email", { required: true })}
-                  className={`border outline-none text-[1rem] placeholder:text-sm rounded px-2 py-[0.7rem] 3xl:py-[0.7rem] sm:py-[0.4rem] text-grayColor w-full ${
+                  className={`border outline-none text-[0.9rem] placeholder:text-[0.9rem] rounded px-2 py-[0.5rem] 3xl:py-[0.7rem] sm:py-[0.3rem] text-grayColor w-full ${
                     errors.email?.message &&
                     "focus:ring-red-500 focus:ring-opacity-50 focus:ring-1"
                   }`}
@@ -103,7 +103,7 @@ const Login = () => {
                   type="password"
                   placeholder="password"
                   {...register("password", { required: true })}
-                  className={` border outline-none text-[1rem]  py-[0.7rem] sm:py-[0.4rem] placeholder:text-sm rounded px-2 3xl:py-[0.7rem] text-grayColor w-full ${
+                  className={` border outline-none text-[0.9rem]  py-[0.5rem] sm:py-[0.3rem] placeholder:text-[0.9rem] rounded px-2 3xl:py-[0.7rem] text-grayColor w-full ${
                     errors.password?.message &&
                     "focus:ring-red-500 focus:ring-opacity-50 focus:ring-1"
                   }`}
@@ -118,10 +118,12 @@ const Login = () => {
             <button
               disabled={isSubmitting}
               type="submit"
-              className=" flex items-center justify-center gap-x-2 text-center md:py-2 md:text-[0.82rem] 3xl:text-[1rem] 4xl:text-[1.1rem]  text-[0.95rem] bg-topNav py-[0.6rem] sm:py-1 w-full font-manrope rounded text-white hover:bg-blue-400 "
+              className=" w-full bg-gradient-to-r  from-[hsl(251,82%,67%)] via-purple-500 to-[#8b81f7e1] relative before:w-0 before:hover:w-full before:duration-300 before:hover:bg-[hsl(251,82%,67%)] before:absolute text-white before:bg-opacity-30 before:inset-0 before:z-10 before:transition-all py-[0.4rem] px-2 rounded-full before:rounded-full "
             >
-              {isSubmitting ? <Loader2 className=" animate-spin" /> : null}
-              <p> Log In</p>
+              <p className=" relative z-30 text-[0.85rem] px-1 flex items-center justify-center gap-x-2 text-center w-full">
+                {isSubmitting ? <Loader2 className=" animate-spin" /> : null}{" "}
+                Log In
+              </p>
             </button>
             {/* <SubmitFxn /> */}
           </form>

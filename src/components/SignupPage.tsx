@@ -14,7 +14,6 @@ import { redirect, useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { LiaEye, LiaEyeSlash } from "react-icons/lia"
 
-
 const FormDataSchema = z.object({
   name: z.string().min(1, "Name must be 3 or more characters"),
   email: z.string().email().min(1, "Email must be a valid Email"),
@@ -87,7 +86,7 @@ const Signup = () => {
                   type="text"
                   {...register("name", { required: true })}
                   placeholder="name"
-                  className={` border outline-none text-[1rem] placeholder:text-sm rounded px-2 py-[0.7rem] 3xl:py-[0.7rem] sm:py-[0.4rem] text-grayColor w-full ${
+                  className={` border outline-none text-[0.9rem] placeholder:text-[0.9rem] rounded px-2 py-[0.5rem] 3xl:py-[0.7rem] sm:py-[0.3rem] text-grayColor w-full ${
                     errors.name?.message &&
                     "focus:ring-red-500 focus:ring-opacity-50 focus:ring-1"
                   }`}
@@ -109,7 +108,7 @@ const Signup = () => {
                   type="email"
                   {...register("email", { required: true })}
                   placeholder="email"
-                  className={` border outline-none text-[1rem] placeholder:text-sm rounded px-2 py-[0.7rem] 3xl:py-[0.7rem] sm:py-[0.4rem] text-grayColor w-full ${
+                  className={` border outline-none text-[0.9rem] placeholder:text-[0.9rem] rounded px-2 py-[0.5rem] 3xl:py-[0.7rem] sm:py-[0.3rem] text-grayColor w-full ${
                     errors.email?.message &&
                     "focus:ring-red-500 focus:ring-opacity-50 focus:ring-1"
                   }`}
@@ -132,7 +131,7 @@ const Signup = () => {
                     type={passwordVisible ? "password" : "text"}
                     {...register("password", { required: true })}
                     placeholder="password"
-                    className={` border outline-none text-[1rem] pr-9  py-[0.7rem] sm:py-[0.4rem] placeholder:text-sm 3xl:py-[0.7rem] rounded px-2 text-grayColor w-full ${
+                    className={` border outline-none text-[0.9rem] pr-9  py-[0.5rem] sm:py-[0.3rem] placeholder:text-[0.9rem] 3xl:py-[0.7rem] rounded px-2 text-grayColor w-full ${
                       errors.password?.message &&
                       "focus:ring-red-500 focus:ring-opacity-50 focus:ring-1"
                     }`}
@@ -184,10 +183,13 @@ const Signup = () => {
             </div>
             <button
               disabled={isSubmitting}
-              className=" text-center md:py-2 md:text-[0.82rem] flex items-center justify-center gap-x-2 3xl:text-[1rem]  text-[0.95rem] bg-topNav py-[0.6rem] sm:py-1 w-full font-manrope rounded text-white hover:bg-blue-400"
+              type="submit"
+              className=" w-full bg-gradient-to-r  from-[hsl(251,82%,67%)] via-purple-500 to-[#8b81f7e1] relative before:w-0 before:hover:w-full before:duration-300 before:hover:bg-[hsl(251,82%,67%)] before:absolute text-white before:bg-opacity-30 before:inset-0 before:z-10 before:transition-all py-[0.4rem] px-2 rounded-full before:rounded-full "
             >
-              {isSubmitting ? <Loader2 className=" animate-spin" /> : null}
-              <p> Sign Up</p>
+              <p className=" relative z-30 text-[0.85rem] px-1 flex items-center justify-center gap-x-2 text-center w-full">
+                {isSubmitting ? <Loader2 className=" animate-spin" /> : null}{" "}
+                Sign Up
+              </p>
             </button>
             {/* <SubmitFxn /> */}
           </form>

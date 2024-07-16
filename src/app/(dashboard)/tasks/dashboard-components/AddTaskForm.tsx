@@ -58,7 +58,6 @@ import React, { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 
 import { useRouter } from "next/navigation"
-import { revalidatePath } from "next/cache"
 import { formSchema } from "@/lib/formSchema"
 import { Iuser } from "@/lib/types"
 
@@ -83,7 +82,7 @@ export function AddTaskForm({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
     try {
-      const res = await fetch("/api/tasks", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -98,7 +97,6 @@ export function AddTaskForm({
       toast.success("Task Created Successfully")
       router.push("/tasks/all-task")
       onClose(false)
-      // revalidatePath("/tasks/all-task")
       form.reset()
     } catch (error) {
       console.log(error)
@@ -148,15 +146,9 @@ export function AddTaskForm({
                           {user.name}
                         </SelectItem>
                       ))}
-                      {/* <SelectItem value="apple">Apple</SelectItem>
-                          <SelectItem value="banana">Banana</SelectItem>
-                          <SelectItem value="blueberry">Blueberry</SelectItem>
-                          <SelectItem value="grapes">Grapes</SelectItem>
-                          <SelectItem value="pineapple">Pineapple</SelectItem> */}
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-                {/* <Input placeholder="Task title" {...field} /> */}
 
                 <FormMessage className=" py-0 pb-0 mb-0 h-[0.27rem]" />
               </FormItem>
@@ -271,7 +263,6 @@ export function AddTaskForm({
                       </SelectGroup>
                     </SelectContent>
                   </Select>
-                  {/* <Input placeholder="Task title" {...field} /> */}
 
                   <FormMessage className=" py-0 pb-0 mb-0 h-[0.27rem]" />
                 </FormItem>
@@ -292,14 +283,12 @@ export function AddTaskForm({
                     </SelectTrigger>
                     <SelectContent className=" text-xs">
                       <SelectGroup>
-                        {/* <SelectLabel>Users</SelectLabel> */}
                         <SelectItem value="Open">Open</SelectItem>
                         <SelectItem value="In Progress">In Progress</SelectItem>
                         <SelectItem value="Completed">Completed</SelectItem>
                       </SelectGroup>
                     </SelectContent>
                   </Select>
-                  {/* <Input placeholder="Task title" {...field} /> */}
 
                   <FormMessage className=" py-0 pb-0 mb-0 h-[0.27rem]" />
                 </FormItem>

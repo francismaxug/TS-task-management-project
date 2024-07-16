@@ -7,7 +7,7 @@ const Card = ({ data }: { data: ITaskStats }) => {
       <div className="bg-gradient-to-r  from-[hsl(211,100%,75%)] via-blue-500 to-[#2495ebe1]  border border-gray-300  dark:border-gray-600 h-32 md:h-24 rounded-lg rounded-tr-[40px] rounded-bl-[50px] shadow-sm px-4 py-2 hover:shadow-md hover:cursor-pointer">
         <div className=" flex items-start  justify-between">
           <div className=" flex flex-col ">
-            <p className=" text-[1.4rem] font-semibold">{data.stats.total}</p>
+            <p className=" text-[1.4rem] font-semibold">{data?.stats?.total}</p>
             <p className=" text-[0.84rem] text-white">
               Total <br /> Task
             </p>
@@ -26,7 +26,7 @@ const Card = ({ data }: { data: ITaskStats }) => {
         <div className=" flex items-start  justify-between">
           <div className=" flex flex-col ">
             <p className=" text-[1.4rem] font-semibold text-orange-400">
-              {data.stats.inProgress}
+              {data?.stats?.inProgress}
             </p>
             <p className=" text-[0.84rem] text-white">Task In Progress</p>
           </div>
@@ -43,7 +43,7 @@ const Card = ({ data }: { data: ITaskStats }) => {
         <div className=" flex items-start  justify-between">
           <div className=" flex flex-col ">
             <p className=" text-[1.4rem] font-semibold">
-              {data.stats.completed}
+              {data?.stats?.completed}
             </p>
             <p className=" text-[0.84rem] text-white">Task Completed</p>
           </div>
@@ -60,7 +60,7 @@ const Card = ({ data }: { data: ITaskStats }) => {
       <div className="bg-gradient-to-r  from-[hsl(251,82%,67%)] via-purple-500 to-[#8b81f7e1]  border border-gray-300  dark:border-gray-600 h-32 md:h-24 rounded-lg rounded-tr-[40px] rounded-bl-[50px] shadow-sm px-4 py-2 hover:shadow-md hover:cursor-pointer">
         <div className=" flex items-start  justify-between">
           <div className=" flex flex-col ">
-            <p className=" text-[1.4rem] font-semibold text-orange-400">{data.stats.overdue}</p>
+            <p className=" text-[1.4rem] font-semibold text-orange-400">{data?.stats?.overdue}</p>
             <p className=" text-[0.84rem] text-white">
               Task <br /> Overdue
             </p>

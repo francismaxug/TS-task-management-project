@@ -42,20 +42,20 @@ const chartConfig = {
 } satisfies ChartConfig
 export function PieChartt({ data }: { data: ITaskStats }) {
   const chartData = [
-    { task: "open", tasks: data.stats.open * 10, fill: "var(--color-open)" },
+    { task: "open", tasks: data?.stats?.open * 10, fill: "var(--color-open)" },
     {
       task: "inProgress",
-      tasks: data.stats.inProgress * 10,
+      tasks: data?.stats?.inProgress * 10,
       fill: "var(--color-inProgress)",
     },
     {
       task: "completed",
-      tasks: data.stats.completed * 10,
+      tasks: data?.stats?.completed * 10,
       fill: "var(--color-completed)",
     },
     {
       task: "overdue",
-      tasks: data.stats.overdue * 10,
+      tasks: data?.stats?.overdue * 10,
       fill: "var(--color-overdue)",
     },
   ]
@@ -96,7 +96,7 @@ export function PieChartt({ data }: { data: ITaskStats }) {
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          {data.stats.total.toLocaleString()}
+                          {data?.stats?.total.toLocaleString()}
                         </tspan>
                         <tspan
                           x={viewBox.cx}

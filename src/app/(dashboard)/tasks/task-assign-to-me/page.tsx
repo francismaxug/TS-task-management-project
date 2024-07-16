@@ -8,7 +8,7 @@ import { ITasks } from "@/lib/types"
 async function getTasks(id: string) {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/tasks/task-assigned-to-me?id=${id}`
+      `${process.env.NEXT_PUBLIC_API_URL}/api/tasks/task-assigned-to-me?id=${id}`
     )
     if (!res.ok) {
       return

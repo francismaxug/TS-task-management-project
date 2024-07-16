@@ -46,11 +46,18 @@ import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 
 import { useRouter } from "next/navigation"
-import { revalidatePath } from "next/cache"
 import { formSchema } from "@/lib/formSchema"
 import { ITasks, Iuser } from "@/lib/types"
 
-export function EditTask({ id, users }: { id: string; users: Iuser[] | [] }) {
+export function EditTask({
+  id,
+  users,
+  onClose,
+}: {
+  id: string
+  users: Iuser[] | []
+  onClose: React.Dispatch<React.SetStateAction<boolean>>
+}) {
   const router = useRouter()
 
   console.log(id)
@@ -58,10 +65,21 @@ export function EditTask({ id, users }: { id: string; users: Iuser[] | [] }) {
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/tasks/${id}`)
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`
+        )
         const data = await response.json()
         // console.log(data)
         setTask(data)
+        form.reset({
+          title: data.title, // Use the fetched task data
+          description: data.description,
+          assignedTo: data.assignedTo._id,
+          startDate: new Date(data.startDate),
+          dueDate: new Date(data.dueDate),
+          priority: data.priority,
+          status: data.status,
+        })
       } catch (error) {
         console.log(error)
         setTask(null)
@@ -74,31 +92,16 @@ export function EditTask({ id, users }: { id: string; users: Iuser[] | [] }) {
     defaultValues: {
       title: task?.title,
       description: task?.description,
-      assignedTo: task?.assignedTo.name,
+      assignedTo: task?.assignedTo._id,
       startDate: task?.startDate
-        ? new Date(Date.parse(format(task?.startDate, "PPP")))
-        : undefined,
-      dueDate: task?.dueDate
-        ? new Date(Date.parse(format(task?.dueDate, "PPP")))
-        : undefined,
+        ? new Date(task?.startDate! as string)
+        : new Date(),
+      dueDate: task?.startDate
+        ? new Date(task?.dueDate! as string)
+        : new Date(),
       priority: task?.priority,
       status: task?.status,
     },
-  })
-
-  console.log(task)
-  console.log({
-    title: task?.title,
-    description: task?.description,
-    assignedTo: task?.assignedTo.name,
-    startDate: task?.startDate
-      ? new Date(Date.parse(format(task?.startDate, "PPP")))
-      : undefined,
-    dueDate: task?.dueDate
-      ? new Date(Date.parse(format(task?.dueDate, "PPP")))
-      : undefined,
-    priority: task?.priority,
-    status: task?.status,
   })
 
   // console.log(form.formState.isSubmitting)
@@ -106,8 +109,8 @@ export function EditTask({ id, users }: { id: string; users: Iuser[] | [] }) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
     try {
-      const res = await fetch("/api/tasks", {
-        method: "POST",
+      const res = await fetch(`/api/tasks/${id}`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
@@ -115,31 +118,27 @@ export function EditTask({ id, users }: { id: string; users: Iuser[] | [] }) {
       })
 
       if (!res.ok) {
-        toast.error("error creating new task")
+        toast.error("error updating task")
         return
       }
-      toast.success("Task Created Successfully")
+      toast.success("Task Updated Successfully")
       router.push("/tasks/all-task")
-      // revalidatePath("/tasks/all-task")
+      onClose(false)
+
       form.reset()
     } catch (error) {
       console.log(error)
     } finally {
     }
   }
-  // const forma = format(task?.startDate!, "PPP")
-  // console.log(forma)
-  console.log(form.getValues("title"))
-  console.log(form.getValues("status"))
-  console.log(form.setValue("status", task?.status!))
-  console.log(form.setValue("title", task?.title!))
+
   return (
     <SheetContent side={"left"}>
       <SheetHeader>
         <SheetTitle>Edit Task</SheetTitle>
       </SheetHeader>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 mt-5">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 mt-1">
           <FormField
             control={form.control}
             name="title"
@@ -155,7 +154,7 @@ export function EditTask({ id, users }: { id: string; users: Iuser[] | [] }) {
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className=" py-0 pb-0 mb-0 h-[0.27rem]" />
               </FormItem>
             )}
           />
@@ -172,7 +171,16 @@ export function EditTask({ id, users }: { id: string; users: Iuser[] | [] }) {
                   <SelectTrigger className="w-[100%]">
                     <SelectValue
                       className=""
-                      placeholder={`${task?.assignedTo.name!}`}
+                      defaultValue={
+                        form.getValues("assignedTo")
+                          ? form.getValues("assignedTo")
+                          : ""
+                      }
+                      placeholder={
+                        task?.assignedTo.name!
+                          ? task?.assignedTo.name!
+                          : "Select User"
+                      }
                     />
                   </SelectTrigger>
                   <SelectContent className=" text-xs">
@@ -188,9 +196,8 @@ export function EditTask({ id, users }: { id: string; users: Iuser[] | [] }) {
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-                {/* <Input placeholder="Task title" {...field} /> */}
 
-                <FormMessage />
+                <FormMessage className=" py-0 pb-0 mb-0 h-[0.27rem]" />
               </FormItem>
             )}
           />
@@ -239,7 +246,7 @@ export function EditTask({ id, users }: { id: string; users: Iuser[] | [] }) {
                     </PopoverContent>
                   </Popover>
 
-                  <FormMessage />
+                  <FormMessage className=" py-0 pb-0 mb-0 h-[0.27rem]" />
                 </FormItem>
               )}
             />
@@ -287,7 +294,7 @@ export function EditTask({ id, users }: { id: string; users: Iuser[] | [] }) {
                     </PopoverContent>
                   </Popover>
 
-                  <FormMessage />
+                  <FormMessage className=" py-0 pb-0 mb-0 h-[0.27rem]" />
                 </FormItem>
               )}
             />
@@ -306,21 +313,22 @@ export function EditTask({ id, users }: { id: string; users: Iuser[] | [] }) {
                     <SelectTrigger className="w-[100%]">
                       <SelectValue
                         className=""
-                        placeholder={`${task?.priority!}`}
+                        defaultValue={task?.priority! ? task?.priority : ""}
+                        placeholder={
+                          task?.priority! ? task?.priority : "Select Priority"
+                        }
                       />
                     </SelectTrigger>
                     <SelectContent className=" text-xs">
                       <SelectGroup>
-                        {/* <SelectLabel>Users</SelectLabel> */}
                         <SelectItem value="High">High</SelectItem>
                         <SelectItem value="Low">Low</SelectItem>
                         <SelectItem value="Medium">Medium</SelectItem>
                       </SelectGroup>
                     </SelectContent>
                   </Select>
-                  {/* <Input placeholder="Task title" {...field} /> */}
 
-                  <FormMessage />
+                  <FormMessage className=" py-0 pb-0 mb-0 h-[0.27rem]" />
                 </FormItem>
               )}
             />
@@ -335,20 +343,24 @@ export function EditTask({ id, users }: { id: string; users: Iuser[] | [] }) {
 
                   <Select onValueChange={field.onChange}>
                     <SelectTrigger className="w-[100%]">
-                      <SelectValue className="" placeholder={`${task?.status!}`} />
+                      <SelectValue
+                        className=""
+                        defaultValue={task?.status! ? task?.status : ""}
+                        placeholder={
+                          task?.status! ? task.status : "Select Status"
+                        }
+                      />
                     </SelectTrigger>
                     <SelectContent className=" text-xs">
                       <SelectGroup>
-                        {/* <SelectLabel>Users</SelectLabel> */}
                         <SelectItem value="Open">Open</SelectItem>
                         <SelectItem value="In Progress">In Progress</SelectItem>
                         <SelectItem value="Completed">Completed</SelectItem>
                       </SelectGroup>
                     </SelectContent>
                   </Select>
-                  {/* <Input placeholder="Task title" {...field} /> */}
 
-                  <FormMessage />
+                  <FormMessage className=" py-0 pb-0 mb-0 h-[0.27rem]" />
                 </FormItem>
               )}
             />
@@ -363,12 +375,12 @@ export function EditTask({ id, users }: { id: string; users: Iuser[] | [] }) {
                 </FormLabel>
                 <FormControl>
                   <Textarea
-                    defaultValue={task?.description}
+                    defaultValue={task?.description || ""}
                     className="resize-none"
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className=" py-0 pb-0 mb-0 h-[0.27rem]" />
               </FormItem>
             )}
           />

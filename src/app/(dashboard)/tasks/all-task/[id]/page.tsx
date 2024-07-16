@@ -12,9 +12,12 @@ import GoBack from "../../dashboard-components/GoBack"
 
 async function getATask(id: string) {
   try {
-    const res = await fetch(`http://localhost:3000/api/tasks/${id}`, {
-      cache: "no-cache",
-    })
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`,
+      {
+        cache: "no-cache",
+      }
+    )
     if (!res.ok) {
       return
     }

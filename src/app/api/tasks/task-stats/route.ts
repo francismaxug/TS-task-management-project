@@ -1,10 +1,7 @@
 import { NextResponse, NextRequest } from "next/server"
 import ConnectDB from "@/app/config/db"
-import { revalidatePath } from "next/cache"
 
 import Task from "@/app/model/tasksModel"
-import { getSession } from "@/app/actions/auth"
-export const revalidate = true
 export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
     const today = new Date()

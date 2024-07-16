@@ -51,7 +51,8 @@ import { useState } from "react"
 import Pagination from "./Pagination"
 import Link from "next/link"
 import TriggerActions from "./TriggerActions"
-
+import { filterData } from "@/lib/helper"
+import { handlePrint } from "@/lib/helper"
 export function AllTasks({
   tasks,
   title = "All Task",
@@ -60,26 +61,31 @@ export function AllTasks({
   tasks: ITasks[]
 }) {
   const [currentPage, setCurrentPage] = useState(1)
+  const [searchText, setSearchText] = useState("")
+  const handleSearchChange = (e: any) => {
+    setSearchText(e.target.value)
+  }
   const pageSize = 4
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page)
   }
 
   const startIndex = (currentPage - 1) * pageSize
   const endIndex = startIndex + pageSize
-  const paginatedData = tasks?.slice(startIndex, endIndex)
+  const paginatedData = tasks
+    ?.filter(filterData(searchText))
+    ?.slice(startIndex, endIndex)
 
-  function shortenDescription(str: string, maxWords = 4) {
-    const words = str.split(" ") // Split the string into an array of words
+  function shortenDescription(str: string, maxWords = 3) {
+    const words = str.split(" ")
     if (words.length > maxWords) {
-      return words.slice(0, maxWords).join(" ") + "..." // Take the first 10 words, join them back together, and add "..."
+      return words.slice(0, maxWords).join(" ") + "..."
     }
     console.log(str, words)
-    return str // If the string is already less than 10 words, return it as is
+    return str
   }
 
-  // console.log(paginatedData)
-  // console.log(tasks)
   return (
     <div className="flex min-h-screen w-full flex-col  bg-muted/40 ">
       <div className="flex flex-col sm:gap-4 sm:py-4 ">
@@ -90,33 +96,29 @@ export function AllTasks({
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
                   type="search"
-                  placeholder="Search..."
+                  onChange={handleSearchChange}
+                  placeholder="Search and filter"
                   className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
                 />
               </div>
             </header>
             <div className="ml-auto flex items-center gap-2">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="sm" className="h-7 gap-1">
-                    <ListFilter className="h-3.5 w-3.5" />
-                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      Filter
-                    </span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>Filter by</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuCheckboxItem checked>
-                    Active
-                  </DropdownMenuCheckboxItem>
-                  <DropdownMenuCheckboxItem>Draft</DropdownMenuCheckboxItem>
-                  <DropdownMenuCheckboxItem>Archived</DropdownMenuCheckboxItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              <Button size="sm" variant="outline" className="h-7 gap-1">
+              <Button
+                onClick={() => {
+                  handlePrint(tasks)
+                  console.log("clicked")
+                }}
+                size="sm"
+                variant="outline"
+                className="h-7 gap-1"
+              >
                 <File className="h-3.5 w-3.5" />
+                <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                  Print
+                </span>
+              </Button>
+              <Button size="sm" variant="outline" className="h-7 gap-1">
+                <Package className="h-3.5 w-3.5" />
                 <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                   Export
                 </span>
@@ -208,7 +210,7 @@ export function AllTasks({
                   ))}
                 </TableBody>
               </Table>
-              {tasks?.length === 0 && (
+              {paginatedData?.length === 0 && (
                 <div className=" text-[1rem] mt-4 ">
                   <p className="font-medium text-center">
                     No task at the moment

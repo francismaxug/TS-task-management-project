@@ -27,6 +27,8 @@ import { Iuser } from "@/lib/types"
 
 const TriggerActions = ({ id }: { id: string }) => {
   const [users, setUsers] = useState<Iuser[] | []>([])
+  const [openSheet, setOpenSheet] = useState(false)
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -46,9 +48,12 @@ const TriggerActions = ({ id }: { id: string }) => {
     try {
       confirm("Are you sure you want to delete this task?")
       if (!confirm) return
-      const res = await fetch(`http://localhost:3000/api/tasks/${id}`, {
-        method: "DELETE",
-      })
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`,
+        {
+          method: "DELETE",
+        }
+      )
 
       if (!res.ok) toast.error("Failed to delete task")
       const data = await res.json()
@@ -66,11 +71,11 @@ const TriggerActions = ({ id }: { id: string }) => {
       <DropdownMenuItem>
         <Link href={`/tasks/all-task/${id}`}> View More</Link>
       </DropdownMenuItem>
-      <Sheet>
+      <Sheet open={openSheet} onOpenChange={setOpenSheet}>
         <SheetTrigger asChild>
           <button className="w-full">Edit</button>
         </SheetTrigger>
-        <EditTask id={id} users={users} />
+        <EditTask id={id} users={users} onClose={setOpenSheet} />
       </Sheet>
       <DropdownMenuItem>
         <button
