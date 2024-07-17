@@ -32,7 +32,7 @@ npm run dev
 
 ## Project structure
 This Fulstack Task management application was build with Nextjs.
-## 2. Technologies Used
+## Technologies Used
 * **Nextjs:**  A React Framwork.
 * **Shadcn Ui:** A react component UI library.
 * **Tailwind css:** Autility first CSS framwork.
@@ -44,6 +44,8 @@ This Fulstack Task management application was build with Nextjs.
 * **ZOD:**  For validating inputs to ensure data intergrity.
 * **REACT-HOOK-FORM:**  For form submissions.
 * **Date-fns:**  For formating Dates.
+
+  ### Implemented Search, filtering and print functionalities
 
 
 ##  Database Schema
