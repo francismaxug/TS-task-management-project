@@ -22,7 +22,7 @@ export async function encrypt(payload: any) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("10d")
+    .setExpirationTime("5d")
     .sign(key)
 }
 
@@ -66,7 +66,7 @@ export async function signup(formdata: FormState): Promise<any> {
       email,
       id: data.id,
     }
-    const expires = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000)
+    const expires = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
     //encryt the user data
     const session = await encrypt({ user, expires })
 

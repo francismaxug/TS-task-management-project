@@ -128,7 +128,7 @@ export function AllTasks({
 
           <Card x-chunk="dashboard-06-chunk-0">
             <CardHeader>
-              <CardTitle className=" text-[1rem] 4xl:text-[1.3rem] 2xl:text-[1.1rem] 3xl:text-[1.2rem]">{`${title} (${tasks?.length})`}</CardTitle>
+              <CardTitle className=" text-[1rem] 4xl:text-[1.3rem] 2xl:text-[1.1rem] 3xl:text-[1.2rem]">{`${title} (${tasks?.length ?? 0})`}</CardTitle>
             </CardHeader>
             <CardContent>
               <Table>
