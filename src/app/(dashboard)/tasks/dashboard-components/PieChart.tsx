@@ -116,7 +116,7 @@ export function PieChartt({ data }: { data: ITaskStats }) {
       </CardContent>
       <CardFooter className=" text-center text-sm mt-5 flex items-center justify-center">
         <div className="leading-none text-muted-foreground space-y-1">
-          <p> A P Chart showing task overview</p>
+          <p> A Pie Chart showing task overview</p>
           <p className=" text-[0.7rem] font-semibold">
             Round-Count: (Task) multiplied by 10
           </p>
