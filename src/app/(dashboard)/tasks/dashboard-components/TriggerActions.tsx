@@ -33,7 +33,7 @@ const TriggerActions = ({ id }: { id: string }) => {
     const fetchUsers = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_DOMAIN}/api/users`
+          `${process.env.NEXT_PUBLIC_API_DOMAIN}/users`
         )
         const data = await response.json()
         setUsers(data.user)
@@ -71,7 +71,7 @@ const TriggerActions = ({ id }: { id: string }) => {
     <>
       <DropdownMenuLabel>Actions</DropdownMenuLabel>
       <DropdownMenuItem>
-        <Link href={`${process.env.NEXT_PUBLIC_DOMAIN}/tasks/all-task/${id}`}>
+        <Link href={`/tasks/all-task/${id}`}>
           {" "}
           View More
         </Link>

@@ -31,7 +31,10 @@ const SideBarLinks = () => {
     const fetchUsers = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_DOMAIN}/users`
+          `${process.env.NEXT_PUBLIC_API_DOMAIN}/users`,
+          {
+            cache: "no-store",
+          }
         )
         const data = await response.json()
         setUsers(data.user)
