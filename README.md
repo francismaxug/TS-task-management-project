@@ -22,7 +22,8 @@ DATABASE_URL = ""
 
 npm run dev
 
-[PROJECT-DEMO]([https://nextjs.org/](https://ts-task-management-project.vercel.app/login))
+[PROJECT-DEMO](https://ts-task-management-project.vercel.app/login)
+
 ![My Project Screenshot](public/images/myscreenshot.png)
 
 ## Project structure
