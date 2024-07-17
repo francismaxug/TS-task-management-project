@@ -99,7 +99,7 @@ export function ChangeStatus({ id }: { id: string }) {
         <button
           type="submit"
           disabled={form.formState.isSubmitting}
-          className=" bg-gradient-to-r  from-[hsl(251,82%,67%)] via-purple-500 to-[#8b81f7e1] text-[0.7rem] py-1  flex items-center justify-center px-4 rounded-full  text-center text-white gap-x-1  2xl:text-[1rem] 3xl:text-[1rem]"
+          className=" bg-gradient-to-r  from-[hsl(251,82%,67%)] via-purple-500 to-[#8b81f7e1] text-[0.7rem] py-1  flex items-center justify-center px-4 rounded-full  text-center text-white gap-x-1  2xl:text-[0.9rem] 3xl:text-[1rem]"
         >
           {form.formState.isSubmitting ? (
             <Loader2 className=" animate-spin" />
@@ -108,22 +108,5 @@ export function ChangeStatus({ id }: { id: string }) {
         </button>
       </form>
     </Form>
-    // <form className="flex gap-3 items-center py-7 pl-4 text-[0.85rem] ">
-    //   <p className="font-semibold">Change Status To:</p>
-    //   <Select>
-    //     <SelectTrigger className="w-[180px]">
-    //       <SelectValue  placeholder="Select status" />
-    //     </SelectTrigger>
-    //     <SelectContent>
-    //       <SelectGroup>
-    //         <SelectItem value="In Progress">In Progress</SelectItem>
-    //         <SelectItem value="Completed">Completed</SelectItem>
-    //       </SelectGroup>
-    //     </SelectContent>
-    //   </Select>
-    //   <button className=" bg-gradient-to-r  from-[hsl(251,82%,67%)] via-purple-500 to-[#8b81f7e1] text-[0.7rem] py-1  flex items-center justify-center px-4 rounded-full  text-center text-white">
-    //     Update
-    //   </button>
-    // </form>
   )
 }
