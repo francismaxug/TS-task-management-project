@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project with TypeScript
+This is a [Next.js](https://nextjs.org/) project with TypeScript (Fullstack NextjsApp)
 
 ## Clone Repository
 
@@ -21,6 +21,8 @@ DATABASE_URL = ""
 ## Run the project
 
 npm run dev
+
+![My Project Screenshot](my-project-screenshot.png)
 
 ## Project structure
 This Fulstack Task management application was build with Nextjs.
@@ -70,8 +72,8 @@ const User = models.User ?? model<IUserSchema>("User", UserSchema)
 export default User
 
 ```
-##  Database Schema
-### 1. Taks
+
+### 2. Task
 ```typeScript
 // model/userModel.ts
 import mongoose, { models } from "mongoose"
