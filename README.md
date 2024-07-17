@@ -45,7 +45,7 @@ This Fulstack Task management application was build with Nextjs.
 * **REACT-HOOK-FORM:**  For form submissions.
 * **Date-fns:**  For formating Dates.
 
-  ### Implemented Search, filtering and print functionalities
+  ### Implemented Pagination, Search, filtering and print functionalities
 
 
 ##  Database Schema
