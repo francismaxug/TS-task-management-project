@@ -18,7 +18,6 @@ import {
 } from "@/components/ui/chart"
 import { ITaskStats } from "@/lib/types"
 
-
 const chartConfig = {
   tasks: {
     label: "Task",
@@ -28,14 +27,30 @@ const chartConfig = {
 
 const BarChartt = ({ data }: { data: ITaskStats }) => {
   const chartData = [
-    { task: "Open", tasks: (data?.stats?.open*10), fill: "hsl(var(--chart-4))" },
-    { task: "In Progress", tasks: (data?.stats?.inProgress*10), fill: "hsl(var(--chart-3))" },
-    { task: "Completed", tasks: (data?.stats?.completed*10), fill: "hsl(var(--chart-2))" },
-    { task: "Overdue", tasks: (data?.stats?.overdue*10), fill: "hsl(var(--chart-1))" },
+    {
+      task: "Open",
+      tasks: data?.stats?.open*10,
+      fill: "hsl(var(--chart-4))",
+    },
+    {
+      task: "In Progress",
+      tasks: data?.stats?.inProgress * 10,
+      fill: "hsl(var(--chart-3))",
+    },
+    {
+      task: "Completed",
+      tasks: data?.stats?.completed * 10,
+      fill: "hsl(var(--chart-2))",
+    },
+    {
+      task: "Overdue",
+      tasks: data?.stats?.overdue * 10,
+      fill: "hsl(var(--chart-1))",
+    },
   ]
   return (
-    <Card>
-      <CardHeader className="items-center pb-0 text-[0.7rem]">
+    <Card className="w-full">
+      <CardHeader className="items-center pb-0 text-[0.7rem] text-center mb-4">
         <CardTitle className=" text-[1rem]">Bar Chart Overview</CardTitle>
       </CardHeader>
       <CardContent>
@@ -44,7 +59,7 @@ const BarChartt = ({ data }: { data: ITaskStats }) => {
             accessibilityLayer
             data={chartData}
             margin={{
-              top: 20,
+              top: 30,
             }}
           >
             <CartesianGrid vertical={false} />
@@ -55,11 +70,18 @@ const BarChartt = ({ data }: { data: ITaskStats }) => {
               axisLine={false}
               // tickFormatter={(value) => value.slice(0, 3)}
             />
+
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel={false} />}
             />
-            <Bar dataKey="tasks" fill="var(--color-tasks)" radius={8}>
+            <Bar
+              dataKey="tasks"
+              fill="var(--color-tasks)"
+              radius={8}
+              accentHeight={70}
+              height={20}
+            >
               <LabelList
                 position="top"
                 offset={12}
@@ -70,9 +92,12 @@ const BarChartt = ({ data }: { data: ITaskStats }) => {
           </BarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className=" text-center text-sm mt-5">
-        <div className="leading-none text-muted-foreground">
-          A Bar Chart showing task overview
+      <CardFooter className=" text-center text-sm mt-5 flex items-center justify-center">
+        <div className="leading-none text-muted-foreground space-y-1">
+          <p> A Bar Chart showing task overview</p>
+          <p className=" text-[0.7rem] font-semibold">
+            Bar-Count: (Task) multiplied by 10
+          </p>
         </div>
       </CardFooter>
     </Card>

@@ -20,7 +20,7 @@ const Header = () => {
     <div className=" bg-white fixed left-0 top-0 right-0 w-full flex justify-between items-center px-3 sm:px-10 z-50 py-3 3xl:py-0 sm:py-0  border shadow-md">
       <div className=" flex flex-col text-[0.85rem] ">
         <p className=" font-bold text-[0.95rem]">Welcome 👋</p>
-        <p className=" text-gray-500">Here is what you have for today</p>
+        <p className=" text-gray-500">Here is what you have for today </p>
       </div>
       <button
         onClick={handleLogOut}

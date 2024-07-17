@@ -35,7 +35,7 @@ const Analytics = async () => {
   console.log(data)
   return (
     <div className=" ">
-      <ContentHeader />
+      {/* <ContentHeader /> */}
 
       <div className=" px-2 py-3">
         <Card data={data} />

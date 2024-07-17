@@ -11,7 +11,6 @@ import {
 
 import { Calendar } from "@/components/ui/calendar"
 import { cn } from "@/lib/utils"
-import { Dialog } from "@/components/ui/dialog"
 import {
   Form,
   FormControl,
@@ -72,13 +71,13 @@ export function EditTask({
         // console.log(data)
         setTask(data)
         form.reset({
-          title: data.title, // Use the fetched task data
-          description: data.description,
-          assignedTo: data.assignedTo._id,
-          startDate: new Date(data.startDate),
-          dueDate: new Date(data.dueDate),
-          priority: data.priority,
-          status: data.status,
+          title: data?.title, // Use the fetched task data
+          description: data?.description,
+          assignedTo: data?.assignedTo?._id,
+          startDate: new Date(data?.startDate),
+          dueDate: new Date(data?.dueDate),
+          priority: data?.priority,
+          status: data?.status,
         })
       } catch (error) {
         console.log(error)
@@ -92,7 +91,7 @@ export function EditTask({
     defaultValues: {
       title: task?.title,
       description: task?.description,
-      assignedTo: task?.assignedTo._id,
+      assignedTo: task?.assignedTo?._id,
       startDate: task?.startDate
         ? new Date(task?.startDate! as string)
         : new Date(),
@@ -109,13 +108,16 @@ export function EditTask({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
     try {
-      const res = await fetch(`/api/tasks/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      })
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_DOMAIN}/tasks/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      )
 
       if (!res.ok) {
         toast.error("error updating task")
@@ -171,15 +173,20 @@ export function EditTask({
                   <SelectTrigger className="w-[100%]">
                     <SelectValue
                       className=""
-                      defaultValue={
-                        form.getValues("assignedTo")
-                          ? form.getValues("assignedTo")
-                          : ""
-                      }
+                      // defaultValue={
+                      //   form.getValues("assignedTo")
+                      //     ? form.getValues("assignedTo")
+                      //     : ""
+                      // }
+
                       placeholder={
-                        task?.assignedTo.name!
-                          ? task?.assignedTo.name!
-                          : "Select User"
+                        task?.assignedTo?._id! === task?.createdBy?._id!
+                          ? "Myself"
+                          : task?.assignedTo?._id! !== task?.createdBy?._id!
+                          ? task?.assignedTo !== null
+                            ? task?.assignedTo?.name!
+                            : "Select User"
+                          : "Myself"
                       }
                     />
                   </SelectTrigger>
@@ -187,10 +194,10 @@ export function EditTask({
                     <SelectGroup>
                       <SelectLabel>Users</SelectLabel>
                       {users?.map((user: Iuser) => (
-                        <SelectItem key={user._id} value={user._id}>
-                          {user._id === task?.createdBy._id
+                        <SelectItem key={user?._id} value={user?._id}>
+                          {user?._id === task?.createdBy?._id
                             ? "Myself"
-                            : user.name}
+                            : user?.name}
                         </SelectItem>
                       ))}
                     </SelectGroup>
@@ -221,7 +228,7 @@ export function EditTask({
                           )}
                         >
                           {field.value ? (
-                            format(field.value, "PPP")
+                            format(field.value, "PP")
                           ) : (
                             <span>
                               {task?.startDate ? (
@@ -269,7 +276,7 @@ export function EditTask({
                           )}
                         >
                           {field.value ? (
-                            format(field.value, "PPP")
+                            format(field.value, "PP")
                           ) : (
                             <span>
                               {task?.dueDate ? (
@@ -384,7 +391,7 @@ export function EditTask({
               </FormItem>
             )}
           />
-          <div className=" flex gap-x-3 items-center">
+          <div className=" flex gap-x-3 items-center pt-4">
             <SheetFooter>
               <SheetClose asChild>
                 <button className="bg-gradient-to-r from-gray-500 via-slate-200 to-gray-300  py-1 px-2 rounded-full ">

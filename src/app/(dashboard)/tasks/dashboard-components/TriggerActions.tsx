@@ -69,11 +69,16 @@ const TriggerActions = ({ id }: { id: string }) => {
     <>
       <DropdownMenuLabel>Actions</DropdownMenuLabel>
       <DropdownMenuItem>
-        <Link href={`/tasks/all-task/${id}`}> View More</Link>
+        <Link href={`${process.env.NEXT_PUBLIC_DOMAIN}/tasks/all-task/${id}`}>
+          {" "}
+          View More
+        </Link>
       </DropdownMenuItem>
       <Sheet open={openSheet} onOpenChange={setOpenSheet}>
         <SheetTrigger asChild>
-          <button className="w-full">Edit</button>
+          <button className="w-full text-left pl-2 text-gray-600 hover:bg-gray-100 rounded py-[0.3rem]">
+            Edit
+          </button>
         </SheetTrigger>
         <EditTask id={id} users={users} onClose={setOpenSheet} />
       </Sheet>

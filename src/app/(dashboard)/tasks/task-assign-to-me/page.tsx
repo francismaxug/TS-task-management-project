@@ -29,7 +29,7 @@ const TaskToMe = async () => {
   console.log(data)
   return (
     <>
-      <ContentHeader />
+   
       <AllTasks tasks={data} title="Task Assigned To Me" />
     </>
   )

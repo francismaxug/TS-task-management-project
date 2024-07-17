@@ -60,7 +60,7 @@ export function PieChartt({ data }: { data: ITaskStats }) {
     },
   ]
   return (
-    <Card className="flex flex-col">
+    <Card className="flex flex-col w-full">
       <CardHeader className="items-center pb-0 text-[0.7rem]">
         <CardTitle className=" text-[1rem]">Pie Chart Overview</CardTitle>
       </CardHeader>
@@ -114,9 +114,12 @@ export function PieChartt({ data }: { data: ITaskStats }) {
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className=" text-center text-sm">
-        <div className="leading-none text-muted-foreground">
-          A Pie Chart showing task overview
+      <CardFooter className=" text-center text-sm mt-5 flex items-center justify-center">
+        <div className="leading-none text-muted-foreground space-y-1">
+          <p> A P Chart showing task overview</p>
+          <p className=" text-[0.7rem] font-semibold">
+            Round-Count: (Task) multiplied by 10
+          </p>
         </div>
       </CardFooter>
     </Card>

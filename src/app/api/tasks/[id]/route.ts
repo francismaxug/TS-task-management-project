@@ -96,10 +96,30 @@ export const PATCH = async (
     priority,
     startDate,
   }
+
   console.log(data)
   console.log(params.id)
   await ConnectDB()
   try {
+    const findTask = await Task.findById(params.id)
+    if (!findTask) {
+      return new NextResponse(
+        JSON.stringify({ message: "error updataing task" }),
+        {
+          status: 400,
+        }
+      )
+    }
+
+    const data = {
+      title: title || findTask.title,
+      description:description || findTask.description,
+      status:status || findTask.status,
+      dueDate:dueDate || findTask.dueDate,
+      assignedTo:assignedTo || findTask.assignedTo,
+      priority:priority || findTask.priority,
+      startDate:startDate || findTask.startDate,
+    }
     await Task.findByIdAndUpdate(params.id, data, {
       new: true,
     })

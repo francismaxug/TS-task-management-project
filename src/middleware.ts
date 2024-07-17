@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 
 export async function middleware(req: NextRequest, res: NextResponse) {
   const session = req.cookies.get("session")
-  // console.log(session)
+  console.log(session)
 
   //Take User Bavck to login page if session is not found
   if (!session) {

@@ -66,8 +66,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
     await ConnectDB()
-    const session = await getSession()
-    console.log(session)
+
 
     const allTask = await Task.find({})
       .sort("-createdAt")

@@ -14,16 +14,7 @@ import {
 
 import { Calendar } from "@/components/ui/calendar"
 import { cn } from "@/lib/utils"
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+
 import {
   Form,
   FormControl,
@@ -60,7 +51,14 @@ import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
 import { formSchema } from "@/lib/formSchema"
 import { Iuser } from "@/lib/types"
-
+import { getSession } from "@/app/actions/auth"
+interface IMe {
+  user: {
+    id?: string
+    name: string
+    email: string
+  }
+}
 export function AddTaskForm({
   users,
   onClose,
@@ -69,6 +67,18 @@ export function AddTaskForm({
   onClose: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   const router = useRouter()
+  const [userdata, setUserData] = useState<IMe | null>(null)
+
+  useEffect(() => {
+    async function getUser() {
+      const user = await getSession()
+      setUserData(user)
+    }
+    getUser()
+  }, [])
+
+  console.log(userdata)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -143,7 +153,9 @@ export function AddTaskForm({
                       <SelectLabel>Users</SelectLabel>
                       {users?.map((user: Iuser) => (
                         <SelectItem key={user._id} value={user._id}>
-                          {user.name}
+                          {user._id === userdata?.user?.id
+                            ? "Myself"
+                            : user.name}
                         </SelectItem>
                       ))}
                     </SelectGroup>
@@ -169,12 +181,12 @@ export function AddTaskForm({
                         <Button
                           variant={"outline"}
                           className={cn(
-                            "w-[100%] pl-3 text-left font-normal h-3 py-4 border",
+                            "w-[100%] pl-3 text-left font-normal  h-3 py-4 border",
                             !field.value && "text-muted-foreground"
                           )}
                         >
                           {field.value ? (
-                            format(field.value, "PPP")
+                            format(field.value, "PP")
                           ) : (
                             <span>Pick a date</span>
                           )}
@@ -211,12 +223,12 @@ export function AddTaskForm({
                         <Button
                           variant={"outline"}
                           className={cn(
-                            "w-[100%] pl-3 h-3 py-4 text-left font-normal",
+                            "w-[100%] pl-3 h-3 py-4  text-left font-normal",
                             !field.value && "text-muted-foreground"
                           )}
                         >
                           {field.value ? (
-                            format(field.value, "PPP")
+                            format(field.value, "PP")
                           ) : (
                             <span>Pick a date</span>
                           )}
@@ -311,7 +323,7 @@ export function AddTaskForm({
             )}
           />
           <div className=" flex gap-x-3 items-center pt-4 ">
-            <SheetFooter>
+            <SheetFooter className=" w-full flex">
               <SheetClose asChild>
                 <button className="bg-gradient-to-r from-gray-500 via-slate-200 to-gray-300  py-1 px-2 rounded-full ">
                   <p className="  text-[0.85rem] px-1"> Cancel</p>

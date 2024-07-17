@@ -91,7 +91,7 @@ export function AllTasks({
       <div className="flex flex-col sm:gap-4 sm:py-4 ">
         <main className=" sm:px-3 sm:py-0 md:gap-8">
           <div className="flex items-center mb-4">
-            <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background  sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-0">
+            <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b  sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-0">
               <div className="relative ml-auto flex-1 md:grow-0">
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
@@ -128,12 +128,12 @@ export function AllTasks({
 
           <Card x-chunk="dashboard-06-chunk-0">
             <CardHeader>
-              <CardTitle className=" text-[1rem]">{title}</CardTitle>
+              <CardTitle className=" text-[1rem] 4xl:text-[1.3rem] 2xl:text-[1.1rem] 3xl:text-[1.2rem]">{`${title} (${tasks?.length})`}</CardTitle>
             </CardHeader>
             <CardContent>
               <Table>
                 <TableHeader>
-                  <TableRow className=" text-[0.8rem]  ">
+                  <TableRow className=" text-[0.8rem] 2xl:text-[0.9rem] 3xl:text-[1rem] 4xl:text-[1.2rem]  ">
                     <TableHead>Task Title</TableHead>
                     <TableHead className="hidden md:table-cell">
                       Description
@@ -150,7 +150,10 @@ export function AllTasks({
                 </TableHeader>
                 <TableBody className="">
                   {paginatedData?.map((task) => (
-                    <TableRow className=" text-[0.7rem]" key={task._id}>
+                    <TableRow
+                      className=" text-[0.7rem] 2xl:text-[0.8rem] 3xl:text-[0.9rem] 4xl:text-[1rem]"
+                      key={task._id}
+                    >
                       <TableCell className="font-medium ">
                         {task?.title}
                       </TableCell>
@@ -177,13 +180,13 @@ export function AllTasks({
                           $499.99
                         </TableCell> */}
                       <TableCell className="hidden md:table-cell">
-                        {format(task?.dueDate, "PPP")}
+                        {format(task?.dueDate, "PP")}
                       </TableCell>
                       <TableCell className=" py-2">
                         {title === "All Task" ||
                         title === "Task Assigned To Me" ? (
                           <Link
-                            href={`/tasks/all-task/${task?._id}`}
+                            href={`${process.env.NEXT_PUBLIC_DOMAIN}/tasks/all-task/${task?._id}`}
                             className=" bg-gradient-to-r  from-[hsl(251,82%,67%)] via-purple-500 to-[#8b81f7e1] text-[0.7rem] py-1  flex items-center justify-center px-2 rounded-full  text-center text-white hover:bg-purple-500 hover:transition hover:from-purple-400 hover:via-purple-500 hover:to-purple-100 duration-700 ease-out"
                           >
                             View More
@@ -211,17 +214,13 @@ export function AllTasks({
                 </TableBody>
               </Table>
               {paginatedData?.length === 0 && (
-                <div className=" text-[1rem] mt-4 ">
-                  <p className="font-medium text-center">
-                    No task at the moment
-                  </p>
+                <div className=" text-[1rem] mt-4 2xl:text-[1.1rem] 3xl:text-[1.2rem] 4xl:text-[1.3rem] ">
+                  <p className="font-medium text-center">No task found</p>
                 </div>
               )}
               {!tasks && (
                 <div className=" text-[1rem] mt-4 ">
-                  <p className="font-medium text-center">
-                    No task at the moment
-                  </p>
+                  <p className="font-medium text-center">No task found</p>
                 </div>
               )}
             </CardContent>

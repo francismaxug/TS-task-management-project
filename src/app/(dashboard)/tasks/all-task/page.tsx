@@ -27,7 +27,7 @@ const AllTask = async () => {
   // console.log(format(data[6]?.dueDate, "PPPPp"))
   return (
     <>
-      <ContentHeader />
+    
 
       <AllTasks tasks={data} title="All Task" />
     </>

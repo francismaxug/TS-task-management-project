@@ -1,9 +1,7 @@
 import ContentHeader from "../dashboard-components/ContentHeader"
 import React from "react"
 import { AllTasks } from "@/app/(dashboard)/tasks/dashboard-components/DataTable"
-import { toast } from "react-toastify"
-import { format } from "date-fns"
-import LoadingMessages from "../loading"
+
 import { ITasks } from "@/lib/types"
 import { getSession } from "@/app/actions/auth"
 
@@ -34,7 +32,7 @@ const TaskByMe = async () => {
   console.log(data)
   return (
     <>
-      <ContentHeader />
+   
       <AllTasks tasks={data} title="Task Created by Me" />
     </>
   )
