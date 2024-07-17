@@ -22,7 +22,7 @@ DATABASE_URL = ""
 
 npm run dev
 
-![My Project Screenshot](my-project-screenshot.png)
+![My Project Screenshot](/public/images/Screenshot (890).png)
 
 ## Project structure
 This Fulstack Task management application was build with Nextjs.
