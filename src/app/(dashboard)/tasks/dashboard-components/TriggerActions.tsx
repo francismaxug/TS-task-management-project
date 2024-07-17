@@ -32,7 +32,9 @@ const TriggerActions = ({ id }: { id: string }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("/api/users")
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_DOMAIN}/api/users`
+        )
         const data = await response.json()
         setUsers(data.user)
       } catch (error) {

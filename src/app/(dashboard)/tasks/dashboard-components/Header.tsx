@@ -10,7 +10,7 @@ const Header = () => {
 
   const handleLogOut = async () => {
     await logout()
-    router.push(`${process.env.NEXT_PUBLIC_DOMAIN}/login`)
+    router.push(`/login`)
   }
 
   // useEffect(() => {

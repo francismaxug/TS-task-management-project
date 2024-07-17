@@ -46,7 +46,7 @@ const Login = () => {
     if (res?.status === "failed") {
       return toast.error(res.errorMessage)
     }
-    router.push(`${process.env.NEXT_PUBLIC_DOMAIN}/tasks/overview`)
+    router.push(`/tasks/overview`)
     // console.log(res)
   }
 

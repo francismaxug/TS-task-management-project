@@ -15,7 +15,7 @@ interface Iuser {
 const SideBar = async () => {
   const data: Iuser = await getSession()
   if (!data) {
-    redirect(`${process.env.NEXT_PUBLIC_DOMAIN}/login`)
+    redirect(`/login`)
   }
   const { user } = data
 
