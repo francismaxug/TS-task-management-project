@@ -223,7 +223,7 @@ export function EditTask({
                         <Button
                           variant={"outline"}
                           className={cn(
-                            "w-[100%] pl-3 text-left font-normal h-3 py-4 border",
+                            "w-[100%] pl-3 text-left text-[0.8rem] sm:text-[0.83rem]  font-normal h-3 py-4 border",
                             !field.value && "text-muted-foreground"
                           )}
                         >
@@ -271,7 +271,7 @@ export function EditTask({
                         <Button
                           variant={"outline"}
                           className={cn(
-                            "w-[100%] pl-3 h-3 py-4 text-left font-normal",
+                            "w-[100%] pl-3 h-3 py-4 text-[0.8rem] sm:text-[0.83rem] text-left font-normal",
                             !field.value && "text-muted-foreground"
                           )}
                         >
