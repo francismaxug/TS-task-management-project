@@ -111,7 +111,7 @@ export async function login(formdata: FormLogin): Promise<any> {
       email,
       id: data.id,
     }
-    const expires = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000)
+    const expires = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
     const session = await encrypt({ user, expires })
 
     // Save the session in a cookie
