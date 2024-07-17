@@ -1,5 +1,5 @@
 This is a [Next.js](https://nextjs.org/) project with TypeScript (Fullstack NextjsApp)
-
+https://ts-task-management-project.vercel.app/login
 ## Clone Repository
 
 git clone https://github.com/francismaxug/TS-task-management-project.git
@@ -22,12 +22,20 @@ DATABASE_URL = ""
 
 npm run dev
 
-![My Project Screenshot](public/images/Screenshot(890).png)
+[PROJECT-DEMO](https://ts-task-management-project.vercel.app/login)
+
+* **Email:** text1@gmail.com
+* **Password:** 12345678
+
+
+![My Project Screenshot](public/images/myscreenshot.png)
 
 ## Project structure
 This Fulstack Task management application was build with Nextjs.
 ## 2. Technologies Used
 * **Nextjs:**  A React Framwork.
+* **Shadcn Ui:** A react component UI library.
+* **Tailwind css:** Autility first CSS framwork.
 * **Mongoose:**  Object Data Modeling (ODM) for MongoDB.
 * **MongoDB:**  NoSQL database.
 * **JWT (JSON Web Tokens):**  Used for user authentication.
@@ -108,5 +116,5 @@ export default Task
 
 ```
 
-
+ ## END
 
