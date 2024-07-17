@@ -24,6 +24,8 @@ npm run dev
 
 [PROJECT-DEMO](https://ts-task-management-project.vercel.app/login)
 
+* **Email:** text1@gmail.com
+* **Password:** 12345678
 
 
 ![My Project Screenshot](public/images/myscreenshot.png)
