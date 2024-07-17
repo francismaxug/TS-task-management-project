@@ -19,7 +19,7 @@ async function getATask(id: string) {
     const res = await fetch(
       `${apiDOMAIN}/tasks/${id}`,
       {
-        cache: "no-cache",
+        cache: "no-store",
       }
     )
     if (!res.ok) {

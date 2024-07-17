@@ -53,7 +53,7 @@ export const DELETE = async (
     const path = req.nextUrl.pathname
     revalidatePath(path)
     return new NextResponse(
-      JSON.stringify({ message: "Item deleted successfully" }),
+      JSON.stringify({ message: "Task deleted successfully" }),
       {
         status: 200,
       }

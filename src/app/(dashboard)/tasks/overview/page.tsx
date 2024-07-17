@@ -16,7 +16,7 @@ async function getTasks() {
   }
   try {
     const res = await fetch(`${apiDOMAIN}/tasks/task-stats`, {
-      cache: "no-cache",
+      cache: "no-store",
     })
     if (!res.ok) {
       return

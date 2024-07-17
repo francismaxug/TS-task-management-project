@@ -11,7 +11,7 @@ async function getTasks() {
   }
   try {
     const res = await fetch(`${apiDOMAIN}/tasks`, {
-      cache: "no-cache",
+      cache: "no-store",
     })
     if (!res.ok) {
       throw new Error("Something went wrong")

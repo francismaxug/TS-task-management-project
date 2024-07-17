@@ -11,7 +11,9 @@ async function getTasks(id: string) {
     return []
   }
   try {
-    const res = await fetch(`${apiDOMAIN}/tasks/task-assigned-to-me?id=${id}`)
+    const res = await fetch(`${apiDOMAIN}/tasks/task-assigned-to-me?id=${id}`,{
+      cache: "no-store",
+    })
     if (!res.ok) {
       return
     }

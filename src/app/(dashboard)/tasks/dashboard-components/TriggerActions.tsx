@@ -57,7 +57,7 @@ const TriggerActions = ({ id }: { id: string }) => {
 
       if (!res.ok) toast.error("Failed to delete task")
       const data = await res.json()
-      router.push("/tasks/task-created-by-me")
+      router.push("/tasks/all-task")
       console.log(data)
       toast.success(data.message)
     } catch (error) {
