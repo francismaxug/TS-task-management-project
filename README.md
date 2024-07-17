@@ -34,6 +34,8 @@ npm run dev
 This Fulstack Task management application was build with Nextjs.
 ## 2. Technologies Used
 * **Nextjs:**  A React Framwork.
+* **Shadcn Ui:** A react component UI library.
+* **Tailwind css:** Autility first CSS framwork.
 * **Mongoose:**  Object Data Modeling (ODM) for MongoDB.
 * **MongoDB:**  NoSQL database.
 * **JWT (JSON Web Tokens):**  Used for user authentication.
